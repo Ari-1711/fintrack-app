@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, LogOut, LayoutDashboard, ListOrdered, Wallet } from 'lucide-react';
+import { Plus, LogOut, LayoutDashboard, ListOrdered, Wallet, Smartphone } from 'lucide-react';
 import { Transaction } from '@/data/mockData';
 import { SummaryCards } from '@/components/SummaryCards';
 import { ChartSection, FilterType } from '@/components/ChartSection';
@@ -111,6 +111,16 @@ export default function App() {
             <span className="font-black text-zinc-950 text-lg leading-none">F</span>
           </div>
           <h1 className="text-xl font-bold tracking-tight">FinTrack</h1>
+          
+          <a
+            href="/fintrack-v1.apk"
+            download="FinTrack-v1.apk"
+            className="ml-2 flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-3 py-1.5 rounded-full transition-colors shadow-sm"
+            title="Download APK"
+          >
+            <Smartphone className="w-4 h-4" />
+            <span className="hidden sm:inline text-sm">Download APK</span>
+          </a>
         </div>
 
         <div className="flex items-center gap-3">
