@@ -8,6 +8,7 @@ import { SideForm } from '@/components/SideForm';
 import Auth from '@/components/Auth';
 import { supabase } from '@/lib/supabaseClient';
 import { syncOfflineData } from '@/lib/offlineStorage';
+import { Capacitor } from '@capacitor/core';
 
 // Mobile bottom nav tabs
 type MobileTab = 'dashboard' | 'transactions';
@@ -103,7 +104,10 @@ export default function App() {
   if (!session) return <Auth />;
 
   // ── Shared header ──────────────────────────────────────────────────────────
-  const Header = () => (
+  const Header = () => {
+    const isNative = Capacitor.isNativePlatform();
+    
+    return (
     <header className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-lg sticky top-0 z-30">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
@@ -112,15 +116,17 @@ export default function App() {
           </div>
           <h1 className="text-xl font-bold tracking-tight">FinTrack</h1>
           
-          <a
-            href="/fintrack-v1.apk"
-            download="FinTrack-v1.apk"
-            className="ml-2 flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-3 py-1.5 rounded-full transition-colors shadow-sm"
-            title="Download APK"
-          >
-            <Smartphone className="w-4 h-4" />
-            <span className="hidden sm:inline text-sm">Download APK</span>
-          </a>
+          {!isNative && (
+            <a
+              href="/fintrack-v1.apk"
+              download="FinTrack-v1.apk"
+              className="ml-2 flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-3 py-1.5 rounded-full transition-colors shadow-sm"
+              title="Download APK"
+            >
+              <Smartphone className="w-4 h-4" />
+              <span className="hidden sm:inline text-sm">Download APK</span>
+            </a>
+          )}
         </div>
 
         <div className="flex items-center gap-3">
@@ -146,6 +152,7 @@ export default function App() {
       </div>
     </header>
   );
+  };
 
   // ── Mobile bottom nav ──────────────────────────────────────────────────────
   const BottomNav = () => (
