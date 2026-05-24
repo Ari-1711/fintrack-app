@@ -1,4 +1,4 @@
-package com.example.app;
+package com.ari.fintrack.mercu;
 
 import com.getcapacitor.BridgeActivity;
 
